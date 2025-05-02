@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 
-path = Path('UNRATE.csv')
+path = Path('OHUR.csv')
 lines = path.read_text(encoding='utf-8').splitlines()
 
 reader = csv.reader(lines)
@@ -23,11 +23,17 @@ dates = []
 unemployment_rates = []
 
 for row in reader:
+    current_date = datetime.strptime(row[0], '%Y-%m-%d')
     unrate = float(row[1])
+
+    dates.append(current_date)
     unemployment_rates.append(unrate)
 
 plt.style.use('grayscale')
 figure, graph = plt.subplots()
-graph.plot(unemployment_rates, color='blue')
+graph.plot(dates, unemployment_rates, color='blue')
 
+graph.set_title('Unemployment Rates in Ohio since 1976', fontsize=14)
+graph.set_xlabel("Year", fontsize=14)
+graph.set_ylabel('Unemp Rate', fontsize=14)
 plt.show()
