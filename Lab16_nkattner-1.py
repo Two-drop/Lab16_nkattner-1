@@ -9,9 +9,11 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 class Main:
-
+    """Main class to handle the program
+    """
     def __init__(self):
-        
+        """Initializes the needed variables to graph the data
+        """
         self.path = Path('OHUR.csv')
         self.lines = self.path.read_text(encoding='utf-8').splitlines()
 
@@ -24,6 +26,8 @@ class Main:
         self.graph_data()
 
     def graph_data(self):
+        """Function to graph data and stylize it
+        """
         self.get_data()
         plt.style.use('grayscale')
         figure, graph = plt.subplots()
@@ -35,6 +39,8 @@ class Main:
         plt.show()
 
     def get_data(self):
+        """Function to get the data from the CSV file and append to lists
+        """
         for row in self.reader:
             current_date = datetime.strptime(row[0], '%Y-%m-%d')
             unrate = float(row[1])
